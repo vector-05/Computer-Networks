@@ -1,2 +1,2 @@
 # Computer-Networks
-Programs under Computer Networks Program
+Programs under Computer Networks Course
