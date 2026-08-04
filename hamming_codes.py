@@ -87,7 +87,7 @@ class HammingPacket:
             
         # Capture the stream coming off the wire
         self.received_code = list(transmission_stream)
-        print("[Antenna] Bitstream captured and buffered successfully.")
+        print("[Receiver] Bitstream captured and buffered successfully.")
     
     def correct_data(self):
         """
@@ -164,7 +164,7 @@ class HammingPacket:
         
         # 3. Convert integer list back into the original raw data string
         final_string = "".join(str(bit) for bit in restored_bits)
-        print(f"[Decoder] Extraction complete. Retrieved payload: '{final_string}'")
+        print(f"[Decoder] Extraction complete. Retrieved Code: '{final_string}'")
         return final_string
 
 
@@ -177,7 +177,7 @@ if __name__ == '__main__':
     
     # 1. Sender Encodes
     packet.encode_data()
-    print(f"-> Sender Encoded Vector (Faculty View):  {packet.sender_code[::-1]}")
+    print(f"-> Sender Encoded Code:  {packet.sender_code[::-1]}")
     
     # 2. Transmission (Data leaves sender and goes onto the wire)
     print("\n--- Simulating Noisy Transmission Line ---")
@@ -185,12 +185,12 @@ if __name__ == '__main__':
     
     # 3. Receiver Captures (Antenna grabs data from the wire)
     packet.receive_data(wire_output)
-    print(f"-> Code Received by Antenna (Faculty View): {packet.received_code[::-1]}")
+    print(f"-> Code Received by Receiver: {packet.received_code[::-1]}")
     
     # 4. Correction & Decoding Phase
     print("\n--- Receiver Processing Phase ---")
     packet.correct_data()
-    print(f"-> Restored Output Vector   (Faculty View): {packet.corrected_code[::-1]}")
+    print(f"-> Restored Output Code: {packet.corrected_code[::-1]}")
     
     print("\n--- Data Decoding Phase ---")
     extracted_payload = packet.decode_data()
